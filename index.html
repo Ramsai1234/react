@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Stopwatch</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+    }
+   .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+   .stopwatch {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+   .title {
+      font-size: 2em;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+   .timer-icon {
+      width: 24px;
+      height: 24px;
+      margin-right: 10px;
+    }
+   .time {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+    button {
+      background-color: #eee;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+      margin: 0 10px;
+    }
+    button:hover {
+      background-color: #ddd;
+    }
+    #start {
+      background-color: #2ecc71; /* green */
+    }
+    #start:hover {
+      background-color: #34c759;
+    }
+    #stop {
+      background-color: #f7dc6f; /* yellow */
+    }
+    #stop:hover {
+      background-color: #ffd700;
+    }
+    #reset {
+      background-color: #e74c3c; /* red */
+    }
+    #reset:hover {
+      background-color: #c0392b;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="stopwatch">
+      <h2 class="title">
+        <img src="src/assets/watch.png" class="timer-icon">
+        Stopwatch
+      </h2>
+      <h1 class="time" id="time">00:00:00</h1>
+      <div>
+        <button id="start">Start</button>
+        <button id="stop">Stop</button>
+        <button id="reset">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let startTime;
+    let intervalId;
+    let isRunning = false;
+
+    const timeElement = document.getElementById('time');
+    const startButton = document.getElementById('start');
+    const stopButton = document.getElementById('stop');
+    const resetButton = document.getElementById('reset');
+
+    startButton.addEventListener('click', startTimer);
+    stopButton.addEventListener('click', stopTimer);
+    resetButton.addEventListener('click', resetTimer);
+
+    function startTimer() {
+      if (!isRunning) {
+        startTime = new Date() - (timeElement.textContent.split(':').reduce((acc, curr) => acc * 60 + parseInt(curr), 0) * 1000);
+        intervalId = setInterval(updateTime, 10);
+        isRunning = true;
+      }
+      startButton.disabled = true;
+      stopButton.disabled = false;
+    }
+
+    function stopTimer() {
+      clearInterval(intervalId);
+      isRunning = false;
+      startButton.disabled = false;
+      stopButton.disabled = true;
+    }
+
+    function resetTimer() {
+      clearInterval(intervalId);
+      timeElement.textContent = '00:00:00';
+      isRunning = false;
+      startButton.disabled = false;
+      stopButton.disabled = true;
+    }
+
+    function updateTime() {
+      let elapsedTime = new Date() - startTime;
+      let hours = Math.floor(elapsedTime / (1000 * 60 * 60) % 24);
+      let minutes = Math.floor(elapsedTime / (1000 * 60) % 60);
+      let seconds = Math.floor(elapsedTime / 1000 % 60);
+
+      hours = hours < 10? '0' + hours : hours;
+      minutes = minutes < 10? '0' + minutes : minutes;
+      seconds = seconds < 10? '0' + seconds : seconds;
+
+      timeElement.textContent = hours + ':' + minutes + ':' + seconds;
+    }
+  </script>
+</body>
+</html>

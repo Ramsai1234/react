@@ -1,0 +1,96 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  background-color: #ffffff;
+}
+
+/* Container styles */
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Stopwatch styles */
+
+.stopwatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+  width: 200px;
+}
+
+.timer-display {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.start-button, .stop-button, .reset-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.start-button {
+  background-color: #ff1500;
+  color: #f5f5f5;
+}
+
+.start-button:hover {
+  background-color: #3e8e41;
+}
+
+.start-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.stop-button {
+  background-color: #ff9800;
+  color: #fff;
+}
+
+.stop-button:hover {
+  background-color: #ff9900;
+}
+
+.stop-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.reset-button {
+  background-color: #9f9f9f;
+  color: #fff;
+}
+
+.reset-button:hover {
+  background-color: #a6a6a6;
+}
+
+.reset-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
